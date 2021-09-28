@@ -3,7 +3,7 @@ package list;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class MyArrayList<T> implements MyListInterface<T> {
+public class MyArrayList<T> implements MyListInterface<T>, Iterable<T> {
     private static final int INITIAL_CAPACITY = 10;
     private int size = 0;
     private Object[] elementData = {};

@@ -26,8 +26,8 @@ public class TestArrayList {
 
         Iterator<Accounts> o = accountList.iterator();
 
-        while (o.hasNext()) {
-            System.out.println(o.next());
+        for (Accounts a : accountList) {
+            System.out.println(a.getAcctType());
         }
 
 

@@ -123,9 +123,10 @@ public class CreateACustomer extends Screen{
     private static String enterFirstName() {
         String messageFN = null;
         boolean quitFN = false;
-        boolean valid = true;
+
         String result = null;
         while(!quitFN){
+            boolean valid = true;
             Screen.clearScreen();
             Screen.printMessage(messageFN);
             System.out.print("\t\t\t\t\t\t\tEnter your first name: ");
