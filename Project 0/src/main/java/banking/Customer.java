@@ -99,8 +99,12 @@ public class Customer {
         return totalBalance;
     }
 
-    public void setTotalBalance(double totalBalance) {
-        this.totalBalance = totalBalance;
+    public void setTotalBalance(MyArrayList<Accounts> a) {
+        double sum = 0;
+        for (Accounts x : a){
+            sum = sum + x.balance;
+        }
+        this.totalBalance = sum;
     }
 
     public MyArrayList<Accounts> getAccounts() {

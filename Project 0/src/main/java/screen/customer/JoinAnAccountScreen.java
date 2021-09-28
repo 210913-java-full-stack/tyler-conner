@@ -16,19 +16,27 @@ import java.util.Scanner;
 
 public class JoinAnAccountScreen extends Screen {
 
-    private static int enterAcctNumber() {
+    private static int enterAcctNumber(Customer a) {
         String message = null;
         boolean quit = false;
-        boolean valid = true;
+
         int result = 0;
 
         while(!quit) {
+            boolean valid = true;
             Screen.clearScreen();
             Screen.printMessage(message);
             System.out.print("\t\t\t\t\t\t\tEnter the account number you wish to join: ");
 
             Scanner sc = new Scanner(System.in);
             String entry = sc.next();
+
+            for (Accounts x:a.getAccounts()) {
+                if (x.getAccount_id() == Integer.parseInt(entry)){
+                    valid = false;
+                    message = "You are already in that account";
+                }
+            }
 
             MyArrayList<Character> splitEntry = new MyArrayList<>();
             for (int i = 0; i < entry.length()-1; i++){
@@ -103,7 +111,7 @@ public class JoinAnAccountScreen extends Screen {
 
 
     private static void runJoinAnAccountScreen(Customer a) {
-        int acctNum = JoinAnAccountScreen.enterAcctNumber();
+        int acctNum = JoinAnAccountScreen.enterAcctNumber(a);
 
         boolean quit = false;
         while (!quit){
@@ -123,16 +131,27 @@ public class JoinAnAccountScreen extends Screen {
                     Screen.clearScreen();
 
 
+                    String sql2 = "SELECT * FROM accounts WHERE account_id = ?;";
+                    PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+                    pstmt2.setInt(1, acctNum);
+                    ResultSet rs = pstmt2.executeQuery();
+
+                    rs.next();
+                    double getBalance = rs.getDouble("balance");
+                    String getAcctType = rs.getString("type_account");
+
+                    Accounts newAcct = new Accounts(acctNum,getBalance,getAcctType);
+
+                    a.getAccounts().add(newAcct);
 
 
-                    System.out.print("\t\t\t\t\t\t\tYou've successfully join the account\n\t\t\t\t\t\t\tYou will need to log out and back in to reflect these changes\n\t\t\t\t\t\t\tEnter \"b\" to go back. \n\t\t\t\t\t\t");
 
-                    Scanner sc = new Scanner(System.in);
-                    String entry = sc.next();
 
-                    if(entry.equals("B") || entry.equals("b")){
-                        quit = true;
-                    }
+
+
+
+                    quit = true;
+
 
                 } catch (SQLException | IOException throwables) {
                     throwables.printStackTrace();

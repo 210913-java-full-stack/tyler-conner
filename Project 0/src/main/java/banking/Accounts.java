@@ -10,6 +10,12 @@ public class Accounts {
 
 
     //Constructor
+    public Accounts(int account_id, double balance, String acctType) {
+        this.account_id = account_id;
+        this.balance = balance;
+        this.acctType = acctType;
+
+    }
     public Accounts(int account_id, double balance, String acctType, int createdBy) {
         this.account_id = account_id;
         this.balance = balance;
