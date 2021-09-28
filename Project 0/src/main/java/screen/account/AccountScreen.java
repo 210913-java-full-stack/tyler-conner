@@ -12,7 +12,7 @@ public class AccountScreen extends Screen {
 
 
     private static void runAccountScreen(Customer a) {
-        if (a.getAccounts().size() != 0) {
+
 
             String message = null;
             boolean quit = false;
@@ -21,12 +21,6 @@ public class AccountScreen extends Screen {
 
                 Screen.printMessage(message);
                 if (a.getAccounts().size() >= 1) {
-                    System.out.println("\t\t\t\t\t\t\t=========================" + a.getFirstName() + " " + a.getLastName() + "'s account===========================");
-                    a.setTotalBalance(a.getAccounts());
-                    String stringTotalBalance = NumberFormat.getCurrencyInstance().format(a.getTotalBalance());
-                    System.out.println("\t\t\t\t\t\t\tYou have a total balance of " + stringTotalBalance);
-                    int numAcct = a.getAccounts().size();
-
                     String acct;
 
                     if (a.getAccounts().size() > 1) {
@@ -34,6 +28,13 @@ public class AccountScreen extends Screen {
                     } else {
                         acct = "";
                     }
+                    System.out.println("\t\t\t\t\t\t\t=========================" + a.getFirstName() + " " + a.getLastName() + "'s account"+ acct + "===========================");
+                    a.setTotalBalance(a.getAccounts());
+                    String stringTotalBalance = NumberFormat.getCurrencyInstance().format(a.getTotalBalance());
+                    System.out.println("\t\t\t\t\t\t\tYou have a total balance of " + stringTotalBalance);
+                    int numAcct = a.getAccounts().size();
+
+
                     System.out.println("\t\t\t\t\t\t\tYou have " + numAcct + " account" + acct + ".\n\t\t\t\t\t\t\t==========================================================\n\t\t\t\t\t\t\tAcct#");
                     a.getAccounts().display();
 //            for (int i = 0; i<numAcct; i++) {
@@ -48,7 +49,7 @@ public class AccountScreen extends Screen {
                     if (entry.equals("B") || entry.equals("b"))
                         quit = true;
 
-                }//end if
+
 
             }//end while loop
         }
