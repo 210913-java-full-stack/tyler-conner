@@ -20,7 +20,7 @@ public class AccountScreen extends Screen {
                 Screen.clearScreen();
 
                 Screen.printMessage(message);
-                if (a.getAccounts().size() >= 1) {
+
                     String acct;
 
                     if (a.getAccounts().size() > 1) {
@@ -28,7 +28,7 @@ public class AccountScreen extends Screen {
                     } else {
                         acct = "";
                     }
-                    System.out.println("\t\t\t\t\t\t\t=========================" + a.getFirstName() + " " + a.getLastName() + "'s account"+ acct + "===========================");
+                    System.out.println("\t\t\t\t\t\t\t=========================" + a.getFirstName() + " " + a.getLastName() + "'s account" + acct + "===========================");
                     a.setTotalBalance(a.getAccounts());
                     String stringTotalBalance = NumberFormat.getCurrencyInstance().format(a.getTotalBalance());
                     System.out.println("\t\t\t\t\t\t\tYou have a total balance of " + stringTotalBalance);
@@ -45,15 +45,41 @@ public class AccountScreen extends Screen {
                     //Create the scanner
                     Scanner sc = new Scanner(System.in);
                     String entry = sc.next();
-                    // implement a switch statment below
-                    if (entry.equals("B") || entry.equals("b"))
+
+
+
+                    // trying something new
+                    if (entry.equals("B")|| entry.equals("b")){
                         quit = true;
+                    } else {
+                        boolean entryIsInUserAccountList = false;
+                        int index = 0;
+                        for (int i = 0; i < a.getAccounts().size(); i++) {
+                            if (Integer.parseInt(entry) == a.getAccounts().get(i).getAccount_id()) {
+                                entryIsInUserAccountList = true;
+                                index = i;
+
+                            }//endif
+                        }// end for
+
+                        if (entryIsInUserAccountList){
+                            Screen avs = new AccountViewScreen();
+                            avs.runScreen(a, a.getAccounts().get(index));
+
+                        } else {
+                            message = "Not a valid selection";
+                        }
+
+                    }//end else
+
+
+
 
 
 
             }//end while loop
         }
-    }
+
 
 
 
