@@ -87,8 +87,10 @@ public class LoginScreen extends Screen {
 
 
 
+            } catch (SQLNonTransientConnectionException e){
+                System.out.println("\t\t\t\t\t\t\tThe connection to the database has timed out.\n\t\t\t\t\t\t\tYou will need to restart the program.");
             } catch (SQLException | IOException e) {
-
+                e.printStackTrace();
                 System.out.print("\n\t\t\t\t\t\t\t!!!!!!!!!!\n\n\t\t\t\t\t\t\tYour username or password is incorrect.\n\t\t\t\t\t\t\tWould you like to try logging in again?\n\t\t\t\t\t\t\t=========================\n\n\n\t\t\t\t\t\t\tEnter (Y) Yes or (N) No: ");
                 Scanner scException = new Scanner(System.in);
                 String scanEntryException = scException.next();
