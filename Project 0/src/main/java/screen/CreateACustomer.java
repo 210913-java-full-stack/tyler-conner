@@ -379,20 +379,22 @@ public class CreateACustomer extends Screen{
             }
 
             String sql2 = "INSERT INTO accounts_customers (account_id, customer_id) VALUES (?, ?); ";
-            String sql3 = "INSERT INTO accounts (account_id, balance, type_account, created_by) VALUES (?, 0, \"Checking\", ?);";
+            String sql3 = "INSERT INTO accounts ( balance, type_account, created_by) VALUES ( 100, \"Checking\", ?);";
             PreparedStatement pstmt = conn.prepareStatement(sql2);
             PreparedStatement pstmt2 = conn.prepareStatement(sql3);
             lastAccountID++;
-            pstmt.setInt(1,lastAccountID);
-            pstmt.setInt(2, userID);
-            pstmt2.setInt(1, lastAccountID);
-            pstmt2.setInt(2, userID);
 
-            pstmt.executeUpdate();
+
+            pstmt.setInt(1, lastAccountID);
+            pstmt.setInt(2, userID);
+            pstmt2.setInt(1, userID);
+
+
             pstmt2.executeUpdate();
+            pstmt.executeUpdate();
 
             MyArrayList<Accounts>  accounts = new MyArrayList<Accounts>();
-            Accounts newAcct = new Accounts(lastAccountID, 0, "Checking", userID);
+            Accounts newAcct = new Accounts(lastAccountID, 100, "Checking", userID);
             accounts.add(newAcct);
             Customer newCustomer = new Customer(userID, firstName, lastName, address, city, state, zip, accounts);
 

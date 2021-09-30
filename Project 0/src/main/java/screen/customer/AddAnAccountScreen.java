@@ -37,6 +37,7 @@ public class AddAnAccountScreen extends Screen {
                 if(Character.isAlphabetic(list.next())) {
                     valid = false;
                     message = "Your entry did not contain only digits.";
+                    break;
                 }
             }//end while loop iterator
 
@@ -113,8 +114,10 @@ public class AddAnAccountScreen extends Screen {
             pstmt2.setInt(4, userID);
 
 
-            pstmt.executeUpdate();
+
             pstmt2.executeUpdate();
+            pstmt.executeUpdate();
+
 
             Accounts newAcct = new Accounts(lastAccountID,balance,acctType,userID);
 

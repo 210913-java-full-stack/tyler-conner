@@ -65,7 +65,7 @@ public class AccountScreen extends Screen {
                         if (entryIsInUserAccountList){
                             Screen avs = new AccountViewScreen();
                             avs.runScreen(a, a.getAccounts().get(index));
-
+                            message = null;
                         } else {
                             message = "Not a valid selection";
                         }
