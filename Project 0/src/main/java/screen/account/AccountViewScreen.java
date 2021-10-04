@@ -66,24 +66,7 @@ public class AccountViewScreen extends Screen {
             }
 
         }//end while loop
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void runScreen() {

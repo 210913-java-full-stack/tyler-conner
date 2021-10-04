@@ -14,7 +14,6 @@ import java.util.concurrent.Callable;
 
 public class CreateACustomer extends Screen{
 
-
     private static String enterUsername() {
         String messageFN = null;
         boolean quitFN = false;
@@ -195,7 +194,6 @@ public class CreateACustomer extends Screen{
     }//end method
 
 
-
     private static void runCreateACustomer() {
         String username = CreateACustomer.enterUsername();
         String password = CreateACustomer.enterPassword();
@@ -235,9 +233,6 @@ public class CreateACustomer extends Screen{
             ResultSet rs2 = pstm2.executeQuery();
             rs2.next();
             userID = rs2.getInt("user_id");
-
-
-
 
 
 
@@ -281,17 +276,11 @@ public class CreateACustomer extends Screen{
 
             cs.runScreen(newCustomer);
 
-
-
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
 
     }//end method
-
-
-
-
 
     @Override
     public void runScreen() {  CreateACustomer.runCreateACustomer();}
