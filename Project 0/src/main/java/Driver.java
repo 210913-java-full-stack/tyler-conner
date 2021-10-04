@@ -9,7 +9,11 @@ public class Driver {
 
     public static void main(String[] args) {
         Screen main = new MainScreen();
-        main.runScreen();
+        try {
+            main.runScreen();
+        } catch (InterruptedException e){
+            e.printStackTrace();//should never occur
+        }
     }//end main method
 
 }//end class

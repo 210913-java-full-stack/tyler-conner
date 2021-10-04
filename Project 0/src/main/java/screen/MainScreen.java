@@ -43,15 +43,25 @@ public class MainScreen extends Screen{
                 case "1":
                     // send user to login screen
                     Screen ls = new LoginScreen();
+                    try{
                     ls.runScreen();
+                        message = null;
+                    }catch (InterruptedException e){
+                        message = "The connection to the database has timed out. You will need to restart the progarm";
+                    }
+
 
                     //set message to null, in case it has a string
-                    message = null;
+
                     break;
 
                 case "2":
                     Screen ccs = new CreateACustomer();
-                    ccs.runScreen();
+                    try {
+                        ccs.runScreen();
+                    } catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
                     break;
                 case "Q":
                 case "q":

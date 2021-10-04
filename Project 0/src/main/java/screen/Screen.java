@@ -5,7 +5,7 @@ import banking.Customer;
 
 public abstract class Screen implements ScreenInterface{
     @Override
-    public abstract void runScreen();
+    public abstract void runScreen() throws InterruptedException;
 
     @Override
     public abstract void runScreen(Customer a);

@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class LoginScreen extends Screen {
 
 
-    private static void runLoginScreen() {
+    private static void runLoginScreen() throws InterruptedException {
         String message = null;
         boolean quit = false;
         while(!quit) {
@@ -36,7 +36,7 @@ public class LoginScreen extends Screen {
 
             try {
                 Connection conn = ConnectionManager.getConnection();
-                String sql = "SELECT c.customer_id, c.first_name, c.last_name, c.address, c.city, c.state, c.zip, a.account_id, a.balance , a.type_account , a.created_by, u.username, u.password " +
+                String sql = "SELECT c.customer_id, c.first_name, c.last_name, a.account_id, a.balance , a.type_account , a.created_by, u.username, u.password " +
                                 "FROM customers c " +
                                 "JOIN accounts_customers ac ON c.customer_id = ac.customer_id " +
                                 "JOIN accounts a ON ac.account_id = a.account_id " +
@@ -53,10 +53,6 @@ public class LoginScreen extends Screen {
                 int tempCustId = rs.getInt("customer_id");
                 String tempFirstName = rs.getString("first_name");
                 String tempLastName = rs.getString("last_name");
-                String tempAddress = rs.getString("address");
-                String tempCity = rs.getString("city");
-                String tempState = rs.getString("state");
-                int tempZip = rs.getInt("zip");
 
 
                 ResultSet rs2 = pstm.executeQuery();
@@ -80,7 +76,7 @@ public class LoginScreen extends Screen {
 
                 }
 
-                Customer newCust = new Customer(tempCustId, tempFirstName, tempLastName, tempAddress,tempCity,tempState,  tempZip, accountArray);
+                Customer newCust = new Customer(tempCustId, tempFirstName, tempLastName,  accountArray);
                 Screen customerScreen = new CustomerScreen();
                 customerScreen.runScreen(newCust);
                 quit = true;
@@ -89,7 +85,12 @@ public class LoginScreen extends Screen {
 
 
             } catch (SQLNonTransientConnectionException e){
+
+                Screen.clearScreen();
                 System.out.println("\t\t\t\t\t\t\tThe connection to the database has timed out.\n\t\t\t\t\t\t\tYou will need to restart the program.");
+                Thread.sleep(5000);
+                quit = true;
+
             } catch (SQLException | IOException e) {
 
 //      e.printStackTrace();
@@ -115,7 +116,7 @@ public class LoginScreen extends Screen {
     }
 
     @Override
-    public void runScreen() { LoginScreen.runLoginScreen(); }
+    public void runScreen() throws InterruptedException { LoginScreen.runLoginScreen(); }
 
     @Override
     public void runScreen(Customer a) {} //Do Not Use

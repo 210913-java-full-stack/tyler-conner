@@ -37,10 +37,9 @@ public class CustomerScreen extends Screen {
                     "\t\t\t\t\t\t\t==================  " + a.getFirstName()+ " " + a.getLastName() + "  ========================" +
                     "\n\t\t\t\t\t\t\tInset the number from the option you want below:" +
                             "\n\t\t\t\t\t\t\t\t1) View accounts" +
-                            "\n\t\t\t\t\t\t\t\t2) View your profile" +
-                            "\n\t\t\t\t\t\t\t\t3) Create an account" +
-                            "\n\t\t\t\t\t\t\t\t4) Join an account" +
-                            "\n\t\t\t\t\t\t\t\t5) Logout" +
+                            "\n\t\t\t\t\t\t\t\t2) Create an account" +
+                            "\n\t\t\t\t\t\t\t\t3) Join an account" +
+                            "\n\t\t\t\t\t\t\t\t4) Logout" +
                             "\n\t\t\t\t\t\t\t==============================================" +
                             "\n\t\t\t\t\t\t\tEnter Selection:");
 
@@ -60,23 +59,17 @@ public class CustomerScreen extends Screen {
                     message = null;
                     break;
                 case "2":
-                    Screen csd = new CustomerDetailScreen();
-                    csd.runScreen(a);
-                    message = null;
-
-                    break;
-                case "3":
                     Screen aaas = new AddAnAccountScreen();
                     aaas.runScreen(a);
                     message = null;
                     break;
-                case "4":
+                case "3":
 
                     Screen jaas = new JoinAnAccountScreen();
                     jaas.runScreen(a);
                     message = null;
                     break;
-                case "5":
+                case "4":
                     quit = true;
                     break;
                 default:

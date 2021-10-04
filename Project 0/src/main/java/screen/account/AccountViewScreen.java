@@ -60,7 +60,7 @@ public class AccountViewScreen extends Screen {
                     quit = true;
                     break;
                 default:
-                    message = "Invalid selection. Try 1,2 or B";
+                    message = "Invalid selection. Try 1, 2, 3, 4, or B";
                     break;
 
             }
