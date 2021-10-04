@@ -34,10 +34,14 @@ public class AccountViewScreen extends Screen {
 
             switch (entry){
                 case "1":
-                    message = "Implement the Deposit Screen.";
+                    message = null;
+                    DepositScreen ds = new DepositScreen();
+                    ds.runScreen(a,b);
                     break;
                 case "2":
-                    message = "Implement the Withdraw Screen.";
+                    message = null;
+                    WithdrawScreen ws = new WithdrawScreen();
+                    ws.runScreen(a,b);
                     break;
                 case "B":
                 case "b":
