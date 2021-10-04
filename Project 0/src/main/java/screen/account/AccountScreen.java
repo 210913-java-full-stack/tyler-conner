@@ -6,6 +6,8 @@ import screen.Screen;
 
 import java.text.NumberFormat;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AccountScreen extends Screen {
 
@@ -41,7 +43,7 @@ public class AccountScreen extends Screen {
 //                String acctBal = NumberFormat.getCurrencyInstance().format(a.getAccounts().get(i).getBalance());
 //                System.out.println((i+1) + ") " +a.getAccounts().get(i).getAccount_id() + " has a balance of " + acctBal + ".");
 //            }
-                    System.out.println("\t\t\t\t\t\t\tWhich account would you like to view?\n\t\t\t\t\t\t\tEnter the account number or enter \"B\" to go back to the customer screen");
+                    System.out.print("\t\t\t\t\t\t\tWhich account would you like to view?\n\t\t\t\t\t\t\tEnter the account number or enter \"B\" to go back to the customer screen: ");
                     //Create the scanner
                     Scanner sc = new Scanner(System.in);
                     String entry = sc.next();
@@ -52,22 +54,32 @@ public class AccountScreen extends Screen {
                     if (entry.equals("B")|| entry.equals("b")){
                         quit = true;
                     } else {
-                        boolean entryIsInUserAccountList = false;
-                        int index = 0;
-                        for (int i = 0; i < a.getAccounts().size(); i++) {
-                            if (Integer.parseInt(entry) == a.getAccounts().get(i).getAccount_id()) {
-                                entryIsInUserAccountList = true;
-                                index = i;
+                        Pattern p = Pattern.compile("9[0-9]{5}");
+                        Matcher m = p.matcher(entry);
+                        boolean bool = m.matches();
 
-                            }//endif
-                        }// end for
+                        if (bool) {
 
-                        if (entryIsInUserAccountList){
-                            Screen avs = new AccountViewScreen();
-                            avs.runScreen(a, a.getAccounts().get(index));
-                            message = null;
+
+                            boolean entryIsInUserAccountList = false;
+                            int index = 0;
+                            for (int i = 0; i < a.getAccounts().size(); i++) {
+                                if (Integer.parseInt(entry) == a.getAccounts().get(i).getAccount_id()) {
+                                    entryIsInUserAccountList = true;
+                                    index = i;
+
+                                }//endif
+                            }// end for
+
+                            if (entryIsInUserAccountList) {
+                                Screen avs = new AccountViewScreen();
+                                avs.runScreen(a, a.getAccounts().get(index));
+                                message = null;
+                            } else {
+                                message = "Not a valid selection";
+                            }
                         } else {
-                            message = "Not a valid selection";
+                            message = "Not a valid selection.";
                         }
 
                     }//end else

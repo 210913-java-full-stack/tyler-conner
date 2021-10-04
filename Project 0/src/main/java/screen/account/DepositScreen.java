@@ -32,7 +32,7 @@ public class DepositScreen extends Screen {
             Matcher m = p.matcher(entry);
             boolean bool = m.matches();
 
-            System.out.println(bool);
+
 
             if (bool){
                 quit = true;
@@ -49,6 +49,12 @@ public class DepositScreen extends Screen {
 
                     pstm.executeUpdate();
 
+                    String sql2 = "INSERT INTO transactions (amount, acct_to, trans_type) VALUES (?, ?, \"Deposit\")";
+                    PreparedStatement pstmTwo = conn.prepareStatement(sql2);
+                    pstmTwo.setDouble(1, deposit);
+                    pstmTwo.setInt(2,b.getAccount_id());
+
+                    pstmTwo.executeUpdate();
 
                 } catch (SQLException | IOException e){
                     e.printStackTrace();

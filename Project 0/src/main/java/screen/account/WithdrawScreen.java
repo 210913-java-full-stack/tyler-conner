@@ -56,6 +56,13 @@ public class WithdrawScreen extends Screen {
 
                     pstm.executeUpdate();
 
+                    String sql2 = "INSERT INTO transactions (amount, acct_from, trans_type) VALUES (?, ?, \"Withdraw\")";
+                    PreparedStatement pstmTwo = conn.prepareStatement(sql2);
+                    pstmTwo.setDouble(1, withdraw);
+                    pstmTwo.setInt(2,b.getAccount_id());
+
+                    pstmTwo.executeUpdate();
+
 
                 } catch (SQLException | IOException e){
                     e.printStackTrace();

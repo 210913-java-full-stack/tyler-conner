@@ -25,6 +25,8 @@ public class AccountViewScreen extends Screen {
                     "\t\t\t\t\t\t\t========================================================\n" +
                     "\t\t\t\t\t\t\t1) Deposit money\n" +
                     "\t\t\t\t\t\t\t2) Withdraw money\n" +
+                    "\t\t\t\t\t\t\t3) Transfer money to another account.\n" +
+                    "\t\t\t\t\t\t\t4) View Transaction history.\n" +
                     "\t\t\t\t\t\t\tB) to go back\n" +
                     "\t\t\t\t\t\t\t========================================================\n" +
                     "\t\t\t\t\t\t\tEnter selection: ");
@@ -42,6 +44,16 @@ public class AccountViewScreen extends Screen {
                     message = null;
                     WithdrawScreen ws = new WithdrawScreen();
                     ws.runScreen(a,b);
+                    break;
+                case "3":
+                    message = null;
+                    TransferScreen ts = new TransferScreen();
+                    ts.runScreen(a,b);
+                    break;
+                case "4":
+                    message = null;
+                    HistoryScreen hs = new HistoryScreen();
+                    hs.runScreen(a,b);
                     break;
                 case "B":
                 case "b":
