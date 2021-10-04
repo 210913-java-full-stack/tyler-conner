@@ -97,7 +97,7 @@ INSERT INTO accounts_customers (account_id, customer_id) VALUES (900000,1);
 
 
 
-SELECT c.customer_id, c.first_name, c.last_name, c.address, c.city, c.state, c.zip, a.account_id, a.balance , a.type_account , a.created_by, u.username, u.password 
+SELECT c.customer_id, c.first_name, c.last_name,  a.account_id, a.balance , a.type_account , a.created_by, u.username, u.password
 FROM customers c 
 JOIN accounts_customers ac ON c.customer_id = ac.customer_id
 JOIN accounts a ON ac.account_id = a.account_id
