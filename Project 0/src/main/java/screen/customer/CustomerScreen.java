@@ -24,13 +24,8 @@ public class CustomerScreen extends Screen {
             //Clear old screen from console
             Screen.clearScreen();
 
-
-
-
             //if message contains a string, print message
             Screen.printMessage(message);
-
-
 
             //print customer menu
             System.out.print(
@@ -43,16 +38,12 @@ public class CustomerScreen extends Screen {
                             "\n\t\t\t\t\t\t\t==============================================" +
                             "\n\t\t\t\t\t\t\tEnter Selection:");
 
-
             //Use scanner to get user input
             Scanner sc = new Scanner(System.in);
             String entry = sc.next();
 
-
             //Switch statement to decide what page to go to.
             switch (entry){
-
-
                 case "1":
                     Screen as = new AccountScreen();
                     as.runScreen(a);

@@ -21,6 +21,7 @@ public class DepositScreen extends Screen {
         String message = null;
 
         while (!quit) {
+
             Screen.clearScreen();
             Screen.printMessage(message);
             System.out.print("\t\t\t\t\t\t\tEnter the amount you want to deposit: ");

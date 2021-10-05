@@ -13,47 +13,54 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class JoinAnAccountScreen extends Screen {
 
     private static int enterAcctNumber(Customer a) {
+        //set variables
         String message = null;
         boolean quit = false;
-
         int result = 0;
 
+        //while loop to run screen as long as needed
         while(!quit) {
+            //valid set to true at beginning of while loop
             boolean valid = true;
+            //clear screen
             Screen.clearScreen();
+            //print message if not null
             Screen.printMessage(message);
+            //get the user to enter the account number
             System.out.print("\t\t\t\t\t\t\tEnter the account number you wish to join: ");
 
+            //get the user input
             Scanner sc = new Scanner(System.in);
             String entry = sc.next();
 
-            for (Accounts x:a.getAccounts()) {
-                if (x.getAccount_id() == Integer.parseInt(entry)){
-                    valid = false;
-                    message = "You are already in that account";
+            //validate the user input
+            Pattern p = Pattern.compile("9[0-9]{5}");
+            Matcher m = p.matcher(entry);
+            boolean bool = m.matches();
+
+
+            if (bool) {
+                //check to see if user is already in account
+                for (Accounts x : a.getAccounts()) {
+                    if (x.getAccount_id() == Integer.parseInt(entry)) {
+                        valid = false;
+                        message = "You are already in that account";
+                    }
+                }//end for loop
+
+
+                if (valid) {
+                    quit = true;
+                    result = Integer.parseInt(entry);
                 }
-            }
-
-            MyArrayList<Character> splitEntry = new MyArrayList<>();
-            for (int i = 0; i < entry.length()-1; i++){
-                splitEntry.add(entry.charAt(i));
-            }
-
-            Iterator<Character> list = splitEntry.iterator();
-            while (list.hasNext()){
-                if(!Character.isDigit(list.next())) {
-                    valid = false;
-                    message = "Your entry should only contain digits.";
-                }
-            }//end while loop iterator
-
-            if(valid){
-                quit = true;
-                result = Integer.parseInt(entry);
+            }else{
+                message = "Not a valid format for an account number.";
             }
         }// end while loop
         return result;
